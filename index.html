@@ -4,11 +4,11 @@
     <meta charset="utf-8" />
     <meta
       name="description"
-      content="SegMASt3R: Geometry Grounded Segment Matching"
+      content="SegMASt3R: Geometry Grounded Segment Matching - Leveraging 3D Foundation Models for Wide-Baseline Segment Matching"
     />
     <meta
       name="keywords"
-      content="SegMASt3R, Segment Matching, Image-Goal Navigation, Instance Mapping"
+      content="SegMASt3R, Segment Matching, 3D Foundation Models, MASt3R, Image-Goal Navigation, Instance Mapping, Computer Vision"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SegMASt3R: Geometry Grounded Segment Matching</title>
@@ -46,7 +46,40 @@
                 SegMASt3R: Geometry Grounded Segment Matching
               </h1>
               <div class="is-size-5 publication-authors">
-                <span class="author-block"> Anonymous Authors </span>
+                <span class="author-block">Anonymous Authors</span>
+              </div>
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">
+                  <strong><em>Accepted at NeurIPS 2025 (Spotlight 🌟)</em></strong>
+                </span>
+              </div>
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <span class="link-block">
+                    <a href="#" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Paper</span>
+                    </a>
+                  </span>
+                  <span class="link-block">
+                    <a href="#" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fab fa-github"></i>
+                      </span>
+                      <span>Code</span>
+                    </a>
+                  </span>
+                  <span class="link-block">
+                    <a href="#" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fas fa-database"></i>
+                      </span>
+                      <span>Dataset</span>
+                    </a>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -70,8 +103,8 @@
                 the spatial understanding of 3D foundation models to tackle wide-baseline segment matching,
                 a challenging setting involving extreme viewpoint shifts. We propose an architecture that uses
                 the inductive bias of these 3D foundation models to match segments across image pairs with up to
-                180◦ rotation. Extensive experiments show that our approach outperforms state-of-the-art methods,
-                including the SAM2 video propagator and local feature matching methods, by upto 30% on the
+                180° rotation. Extensive experiments show that our approach outperforms state-of-the-art methods,
+                including the SAM2 video propagator and local feature matching methods, by up to 30% on the
                 AUPRC metric, on ScanNet++ and Replica datasets. We further demonstrate benefits of the proposed model
                 on relevant downstream tasks, including 3D instance segmentation and image-goal navigation.
               </p>
@@ -79,6 +112,691 @@
           </div>
         </div>
         <!--/ Abstract. -->
+      </div>
+    </section>
+
+    <!-- Architecture Overview -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3 has-text-centered">Method</h2>
+            <div class="content has-text-centered">
+              <img src="./static/images/architecture.png" alt="SegMASt3R Architecture" class="architecture-image">
+              <p class="is-italic">
+                <strong>Pipeline Overview:</strong> A wide-baseline image pair is processed by a frozen MASt3R backbone to extract patch-level features; 
+                masks from a parallel segmentation module or ground truth masks and these patch-level features are aggregated by the segment-feature head 
+                to form per-segment descriptors, which are then matched across images via a differentiable optimal-transport layer to produce the final matched segments.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Results -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3 has-text-centered">Key Results</h2>
+            
+            <!-- ScanNet++ Results -->
+            <div class="dataset-comparison">
+              <h3 class="dataset-title">ScanNet++ Performance</h3>
+              <div class="table-scroll-container">
+                <table class="table is-striped is-fullwidth">
+                  <thead>
+                    <tr>
+                      <th rowspan="2">Method</th>
+                      <th colspan="3">0°-45°</th>
+                      <th colspan="3">45°-90°</th>
+                      <th colspan="3">90°-135°</th>
+                      <th colspan="3">135°-180°</th>
+                    </tr>
+                    <tr>
+                      <th>AUPRC</th>
+                      <th>R@1</th>
+                      <th>R@5</th>
+                      <th>AUPRC</th>
+                      <th>R@1</th>
+                      <th>R@5</th>
+                      <th>AUPRC</th>
+                      <th>R@1</th>
+                      <th>R@5</th>
+                      <th>AUPRC</th>
+                      <th>R@1</th>
+                      <th>R@5</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="13" style="text-align: center; font-weight: bold; background: #f0f0f0;">Local Feature Matching</td>
+                    </tr>
+                    <tr>
+                      <td>SP-LG</td>
+                      <td>42.1</td>
+                      <td>45.6</td>
+                      <td>51.2</td>
+                      <td>33.5</td>
+                      <td>36.9</td>
+                      <td>43.1</td>
+                      <td>15.9</td>
+                      <td>19.7</td>
+                      <td>26.2</td>
+                      <td>6.1</td>
+                      <td>9.3</td>
+                      <td>14.6</td>
+                    </tr>
+                    <tr>
+                      <td>GiM-DKM</td>
+                      <td>59.1</td>
+                      <td>64.9</td>
+                      <td>69.7</td>
+                      <td>54.9</td>
+                      <td>60.2</td>
+                      <td>66.1</td>
+                      <td>39.6</td>
+                      <td>44.5</td>
+                      <td>51.8</td>
+                      <td>21.3</td>
+                      <td>25.9</td>
+                      <td>32.7</td>
+                    </tr>
+                    <tr>
+                      <td>RoMA</td>
+                      <td>61.6</td>
+                      <td><strong>68.7</strong></td>
+                      <td>73.5</td>
+                      <td><strong>58.9</strong></td>
+                      <td><strong>66.4</strong></td>
+                      <td>73.0</td>
+                      <td>47.4</td>
+                      <td>56.1</td>
+                      <td>65.5</td>
+                      <td>30.0</td>
+                      <td>39.5</td>
+                      <td>49.7</td>
+                    </tr>
+                    <tr>
+                      <td>MASt3R</td>
+                      <td>59.5</td>
+                      <td>68.3</td>
+                      <td>74.2</td>
+                      <td>57.3</td>
+                      <td>65.6</td>
+                      <td>72.5</td>
+                      <td><strong>52.9</strong></td>
+                      <td><strong>60.3</strong></td>
+                      <td>68.9</td>
+                      <td><strong>45.4</strong></td>
+                      <td><strong>52.6</strong></td>
+                      <td>62.2</td>
+                    </tr>
+                    <tr>
+                      <td colspan="13" style="text-align: center; font-weight: bold; background: #f0f0f0;">Segment Matching</td>
+                    </tr>
+                    <tr>
+                      <td>SAM2</td>
+                      <td><strong>61.9</strong></td>
+                      <td>64.6</td>
+                      <td>67.5</td>
+                      <td>46.6</td>
+                      <td>50.1</td>
+                      <td>54.0</td>
+                      <td>27.9</td>
+                      <td>32.5</td>
+                      <td>37.2</td>
+                      <td>17.0</td>
+                      <td>21.6</td>
+                      <td>25.4</td>
+                    </tr>
+                    <tr>
+                      <td>DINOv2</td>
+                      <td>57.9</td>
+                      <td>66.7</td>
+                      <td><strong>87.4</strong></td>
+                      <td>43.0</td>
+                      <td>55.9</td>
+                      <td><strong>83.2</strong></td>
+                      <td>33.5</td>
+                      <td>48.0</td>
+                      <td><strong>78.0</strong></td>
+                      <td>32.4</td>
+                      <td>46.0</td>
+                      <td><strong>75.6</strong></td>
+                    </tr>
+                    <tr>
+                      <td>SegVLAD</td>
+                      <td>44.2</td>
+                      <td>58.6</td>
+                      <td>81.4</td>
+                      <td>32.1</td>
+                      <td>49.5</td>
+                      <td>76.5</td>
+                      <td>23.2</td>
+                      <td>42.2</td>
+                      <td>70.5</td>
+                      <td>20.0</td>
+                      <td>39.6</td>
+                      <td>66.8</td>
+                    </tr>
+                    <tr>
+                      <td>MASt3R</td>
+                      <td>51.7</td>
+                      <td>54.6</td>
+                      <td>69.9</td>
+                      <td>45.6</td>
+                      <td>49.8</td>
+                      <td>68.5</td>
+                      <td>41.4</td>
+                      <td>47.9</td>
+                      <td>69.2</td>
+                      <td>39.5</td>
+                      <td>48.7</td>
+                      <td>72.6</td>
+                    </tr>
+                    <tr style="background: linear-gradient(135deg, #f8f9ff, #e8f2ff);">
+                      <td><strong>SegMASt3R (Ours)</strong></td>
+                      <td><strong>92.8</strong></td>
+                      <td><strong>93.6</strong></td>
+                      <td><strong>98.0</strong></td>
+                      <td><strong>91.1</strong></td>
+                      <td><strong>92.2</strong></td>
+                      <td><strong>97.6</strong></td>
+                      <td><strong>88.0</strong></td>
+                      <td><strong>89.5</strong></td>
+                      <td><strong>96.8</strong></td>
+                      <td><strong>83.6</strong></td>
+                      <td><strong>85.9</strong></td>
+                      <td><strong>95.9</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="has-text-centered">
+                <span class="metric-badge success">Up to 38% improvement</span>
+                <span class="metric-badge info">Consistent across all pose bins</span>
+                <span class="metric-badge warning">Best in wide-baseline scenarios</span>
+              </div>
+            </div>
+
+            <!-- Replica Results -->
+            <div class="dataset-comparison">
+              <h3 class="dataset-title">Cross-Dataset Generalization (Replica)</h3>
+              <div class="table-scroll-container">
+                <table class="table is-striped is-fullwidth">
+                  <thead>
+                    <tr>
+                      <th rowspan="2">Method</th>
+                      <th colspan="3">0°-45°</th>
+                      <th colspan="3">45°-90°</th>
+                      <th colspan="3">90°-135°</th>
+                      <th colspan="3">135°-180°</th>
+                    </tr>
+                    <tr>
+                      <th>AUPRC</th>
+                      <th>R@1</th>
+                      <th>R@5</th>
+                      <th>AUPRC</th>
+                      <th>R@1</th>
+                      <th>R@5</th>
+                      <th>AUPRC</th>
+                      <th>R@1</th>
+                      <th>R@5</th>
+                      <th>AUPRC</th>
+                      <th>R@1</th>
+                      <th>R@5</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="13" style="text-align: center; font-weight: bold; background: #f0f0f0;">Local Feature Matching</td>
+                    </tr>
+                    <tr>
+                      <td>MASt3R</td>
+                      <td><strong>78.2</strong></td>
+                      <td><strong>86.5</strong></td>
+                      <td><strong>89.4</strong></td>
+                      <td><strong>69.5</strong></td>
+                      <td><strong>77.6</strong></td>
+                      <td><strong>81.0</strong></td>
+                      <td><strong>48.0</strong></td>
+                      <td><strong>60.4</strong></td>
+                      <td>64.6</td>
+                      <td><strong>32.5</strong></td>
+                      <td><strong>49.0</strong></td>
+                      <td>54.1</td>
+                    </tr>
+                    <tr>
+                      <td colspan="13" style="text-align: center; font-weight: bold; background: #f0f0f0;">Segment Matching</td>
+                    </tr>
+                    <tr>
+                      <td>MASt3R</td>
+                      <td>52.2</td>
+                      <td>57.5</td>
+                      <td>81.2</td>
+                      <td>39.1</td>
+                      <td>51.0</td>
+                      <td>78.6</td>
+                      <td>23.6</td>
+                      <td>45.9</td>
+                      <td><strong>77.2</strong></td>
+                      <td>17.2</td>
+                      <td>43.8</td>
+                      <td><strong>75.7</strong></td>
+                    </tr>
+                    <tr style="background: linear-gradient(135deg, #f8f9ff, #e8f2ff);">
+                      <td><strong>SegMASt3R (Ours)</strong></td>
+                      <td><strong>95.0</strong></td>
+                      <td><strong>96.0</strong></td>
+                      <td><strong>98.6</strong></td>
+                      <td><strong>86.2</strong></td>
+                      <td><strong>91.2</strong></td>
+                      <td><strong>96.4</strong></td>
+                      <td><strong>73.4</strong></td>
+                      <td><strong>85.2</strong></td>
+                      <td><strong>95.7</strong></td>
+                      <td><strong>68.4</strong></td>
+                      <td><strong>83.8</strong></td>
+                      <td><strong>94.8</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="has-text-centered">
+                <span class="metric-badge success">Strong generalization</span>
+                <span class="metric-badge info">Unseen domain performance</span>
+                <span class="metric-badge warning">Consistent improvements</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Qualitative Results -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3 has-text-centered">Qualitative Results</h2>
+            
+            <!-- Wide-baseline matching examples -->
+            <div class="content">
+              <h3 class="title is-4">Wide-Baseline Segment Matching</h3>
+              <div class="columns">
+                <div class="column">
+                  <img src="./static/images/mf-1.png" alt="Wide-baseline matching example 1" class="result-image">
+                </div>
+                <div class="column">
+                  <img src="./static/images/mf-2.png" alt="Wide-baseline matching example 2" class="result-image">
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column">
+                  <img src="./static/images/mf-3.png" alt="Wide-baseline matching example 3" class="result-image">
+                </div>
+                <div class="column">
+                  <img src="./static/images/mf-4.png" alt="Wide-baseline matching example 4" class="result-image">
+                </div>
+              </div>
+              <p class="is-italic has-text-centered">
+                Examples of wide-baseline segment matching on ScanNet++ dataset. Our method successfully matches segments across extreme viewpoint changes up to 180° rotation.
+              </p>
+            </div>
+
+            <!-- Comparison with SAM2 -->
+
+            <div class="content">
+              <h3 class="title is-4">Comparison with SAM2 Video Propagator</h3>
+              <p class="is-italic has-text-centered">
+                Comprehensive comparison with SAM2's two-frame video propagation under extreme viewpoint variations (135°-180° changes). 
+                SegMASt3R correctly handles perceptual instance aliasing and wide-baseline scenarios where SAM2 fails due to viewpoint changes and mask propagation limitations.
+              </p>
+              <div class="columns">
+                <div class="column">
+                  <img src="./static/images/spp-qual-1.png" alt="SAM2 vs SegMASt3R comparison 1" class="result-image">
+                </div>
+                <div class="column">
+                  <img src="./static/images/spp-qual-3.png" alt="SAM2 vs SegMASt3R comparison 2" class="result-image">
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column">
+                  <img src="./static/images/spp-1-supp.png" alt="Additional SAM2 comparison" class="result-image">
+                </div>
+                <div class="column">
+                  <img src="./static/images/spp-2-supp.png" alt="SAM2 comparison - table matching" class="result-image">
+                </div>
+              </div>
+              <!-- Additional supplementary results -->
+              <div class="columns">
+                <div class="column">
+                  <img src="./static/images/spp-8-supp.png" alt="SAM2 comparison - chair matching" class="result-image">
+                </div>
+                <div class="column">
+                  <img src="./static/images/spp-9-supp.png" alt="SAM2 comparison - wheelchair propagation" class="result-image">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Demo Videos -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3 has-text-centered">Navigation Demo Videos</h2>
+            
+            <div class="content">
+              <p class="has-text-centered">
+                Watch SegMASt3R in action for image-goal navigation tasks across different scenarios.
+              </p>
+              
+              <div class="columns">
+                <div class="column">
+                  <div class="video-container">
+                    <video controls class="video-player">
+                      <source src="./static/videos/nav_bed_20.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                    <p class="has-text-centered is-italic">Navigation to Bed (Episode 20)</p>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="video-container">
+                    <video controls class="video-player">
+                      <source src="./static/videos/nav_chair_8.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                    <p class="has-text-centered is-italic">Navigation to Chair (Episode 8)</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="columns">
+                <div class="column">
+                  <div class="video-container">
+                    <video controls class="video-player">
+                      <source src="./static/videos/nav_chair_55.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                    <p class="has-text-centered is-italic">Navigation to Chair (Episode 55)</p>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="video-container">
+                    <video controls class="video-player">
+                      <source src="./static/videos/nav_sofa_9.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                    <p class="has-text-centered is-italic">Navigation to Sofa (Episode 9)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Downstream Applications -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3 has-text-centered">Downstream Applications</h2>
+            
+            <!-- Instance Mapping -->
+            <div class="content">
+              <h3 class="title is-4">3D Instance Mapping</h3>
+              <div class="table-scroll-container">
+                <table class="table is-striped is-fullwidth">
+                  <thead>
+                    <tr>
+                      <th rowspan="2">Method</th>
+                      <th colspan="2">office0</th>
+                      <th colspan="2">office1</th>
+                      <th colspan="2">office2</th>
+                      <th colspan="2">office3</th>
+                      <th colspan="2">office4</th>
+                      <th colspan="2">room0</th>
+                      <th colspan="2">room1</th>
+                      <th colspan="2">room2</th>
+                    </tr>
+                    <tr>
+                      <th>AP</th>
+                      <th>AP@50</th>
+                      <th>AP</th>
+                      <th>AP@50</th>
+                      <th>AP</th>
+                      <th>AP@50</th>
+                      <th>AP</th>
+                      <th>AP@50</th>
+                      <th>AP</th>
+                      <th>AP@50</th>
+                      <th>AP</th>
+                      <th>AP@50</th>
+                      <th>AP</th>
+                      <th>AP@50</th>
+                      <th>AP</th>
+                      <th>AP@50</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>ConceptGraphs</td>
+                      <td>11.84</td>
+                      <td>28.43</td>
+                      <td>20.31</td>
+                      <td>43.79</td>
+                      <td>8.63</td>
+                      <td>22.82</td>
+                      <td>8.07</td>
+                      <td>22.83</td>
+                      <td>9.46</td>
+                      <td>24.73</td>
+                      <td>12.23</td>
+                      <td>34.34</td>
+                      <td>5.83</td>
+                      <td>12.96</td>
+                      <td>7.83</td>
+                      <td>23.82</td>
+                    </tr>
+                    <tr style="background: linear-gradient(135deg, #f8f9ff, #e8f2ff);">
+                      <td><strong>SegMASt3R (Ours)</strong></td>
+                      <td><strong>79.93</strong></td>
+                      <td><strong>87.17</strong></td>
+                      <td><strong>54.89</strong></td>
+                      <td><strong>64.42</strong></td>
+                      <td><strong>64.00</strong></td>
+                      <td><strong>85.50</strong></td>
+                      <td><strong>58.02</strong></td>
+                      <td><strong>79.93</strong></td>
+                      <td><strong>67.48</strong></td>
+                      <td><strong>85.01</strong></td>
+                      <td><strong>71.02</strong></td>
+                      <td><strong>91.22</strong></td>
+                      <td><strong>64.09</strong></td>
+                      <td><strong>85.50</strong></td>
+                      <td><strong>56.35</strong></td>
+                      <td><strong>76.66</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="notification is-info">
+                <p><strong>Key Results:</strong></p>
+                <ul>
+                  <li><strong>Average AP improvement:</strong> ~50-70% across all scenes</li>
+                  <li><strong>Best performance:</strong> 79.93% AP on office0 scene (vs 11.84% baseline)</li>
+                  <li><strong>Robust re-entry:</strong> Maintains instance identities when objects exit and re-enter the field of view</li>
+                </ul>
+              </div>
+
+              <!-- Instance mapping visualization -->
+              <p class="is-italic has-text-centered">
+                Qualitative comparison showing ground truth RGB view, ConceptGraphs baseline results, and our SegMASt3R enhanced instance mapping. 
+                Each color represents a different object instance. Our method produces cleaner, more consistent instance groupings with reduced over-segmentation.
+              </p>
+              <div class="columns">
+                <div class="column">
+                  <img src="./static/images/room1-rgb_174.png" alt="Ground truth RGB" class="result-image">
+                  <p class="is-italic has-text-centered">Ground Truth RGB</p>
+                </div>
+                <div class="column">
+                  <img src="./static/images/bed-instance-concept-graphs.png" alt="ConceptGraphs baseline" class="result-image">
+                  <p class="is-italic has-text-centered">ConceptGraphs Baseline</p>
+                </div>
+                <div class="column">
+                  <img src="./static/images/bed-instance-segmast3r.png" alt="SegMASt3R result" class="result-image">
+                  <p class="is-italic has-text-centered">SegMASt3R Enhanced</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="content">
+              <h3 class="title is-4">Image-Goal Navigation</h3>
+              <div class="table-scroll-container">
+                <table class="table is-striped is-fullwidth">
+                  <thead>
+                    <tr>
+                      <th rowspan="2">Method</th>
+                      <th colspan="2">S<sub>s</sub>=16, S<sub>ρ</sub>=0.25</th>
+                      <th colspan="2">S<sub>s</sub>=16, S<sub>ρ</sub>=0.5</th>
+                      <th colspan="2">S<sub>s</sub>=32, S<sub>ρ</sub>=0.25</th>
+                      <th colspan="2">S<sub>s</sub>=32, S<sub>ρ</sub>=0.5</th>
+                    </tr>
+                    <tr>
+                      <th>SPL</th>
+                      <th>SSPL</th>
+                      <th>SPL</th>
+                      <th>SSPL</th>
+                      <th>SPL</th>
+                      <th>SSPL</th>
+                      <th>SPL</th>
+                      <th>SSPL</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>RoboHop</td>
+                      <td>36.34</td>
+                      <td>54.25</td>
+                      <td>54.51</td>
+                      <td>69.98</td>
+                      <td>60.57</td>
+                      <td>68.29</td>
+                      <td>57.52</td>
+                      <td>68.47</td>
+                    </tr>
+                    <tr style="background: linear-gradient(135deg, #f8f9ff, #e8f2ff);">
+                      <td><strong>SegMASt3R (Ours)</strong></td>
+                      <td><strong>63.60</strong></td>
+                      <td><strong>78.84</strong></td>
+                      <td><strong>63.60</strong></td>
+                      <td><strong>78.33</strong></td>
+                      <td><strong>66.62</strong></td>
+                      <td><strong>75.20</strong></td>
+                      <td><strong>63.56</strong></td>
+                      <td><strong>73.89</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="columns">
+                <div class="column">
+                  <img src="./static/images/nav-pair2-lg.png" alt="RoboHop baseline navigation" class="result-image">
+                  <p class="is-italic has-text-centered">RoboHop Baseline</p>
+                </div>
+                <div class="column">
+                  <img src="./static/images/nav-pair2-ours.png" alt="SegMASt3R enhanced navigation" class="result-image">
+                  <p class="is-italic has-text-centered">SegMASt3R Enhanced</p>
+                </div>
+              </div>
+              <div class="notification is-success">
+                <p><strong>Navigation Improvements:</strong></p>
+                <ul>
+                  <li><strong>SPL improvement:</strong> Up to 27% absolute improvement in Success weighted by Path Length</li>
+                  <li><strong>Sparse submap performance:</strong> Maintains high success rate even with very sparse submaps (4 images)</li>
+                  <li><strong>Robust localization:</strong> Accurate segment matching enables better goal estimation and navigation</li>
+                </ul>
+              </div>
+              <p class="is-italic has-text-centered">
+                Navigation comparison: SegMASt3R's accurate segment matching (right) guides the agent correctly to the goal, 
+                while the baseline (left) fails due to incorrect segment associations.
+              </p>
+              
+              <!-- Navigation legend -->
+              <!-- <div class="has-text-centered">
+                <img src="./static/images/navigation_legend.png" alt="Navigation legend" style="max-width: 600px; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
+                <p class="is-italic">Navigation visualization legend</p>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Details -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3 has-text-centered">Technical Highlights</h2>
+            
+            <div class="content">
+              <div class="columns">
+                <div class="column">
+                  <div class="tech-box">
+                    <h4 class="title is-5">Key Contributions</h4>
+                    <ul>
+                      <li><strong>3D Foundation Model Integration:</strong> Leverages MASt3R's spatial understanding for segment matching</li>
+                      <li><strong>Segment-Feature Head:</strong> Novel adapter that transforms patch-level features to segment-level descriptors</li>
+                      <li><strong>Differentiable Matching:</strong> Optimal transport-based matching with learnable dustbin for unmatched segments</li>
+                      <li><strong>Wide-Baseline Robustness:</strong> Handles extreme viewpoint changes up to 180° rotation</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="tech-box">
+                    <h4 class="title is-5">Training Details</h4>
+                    <ul>
+                      <li><strong>Dataset:</strong> 860k image pairs from 140 ScanNet++ scenes</li>
+                      <li><strong>Training time:</strong> 22 hours on single RTX A6000 GPU</li>
+                      <li><strong>Inference speed:</strong> 0.579 seconds per image pair</li>
+                      <li><strong>Architecture:</strong> Frozen MASt3R backbone + trainable segment-feature head</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Citation -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3 has-text-centered">Citation</h2>
+            <div class="content">
+              <pre style="background-color: #f5f5f5; padding: 1rem; border-radius: 5px; overflow-x: auto;"><code>@inproceedings{segmast3r2025,
+  title={SegMASt3R: Geometry Grounded Segment Matching},
+  author={Anonymous Authors},
+  booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
+  year={2025}
+}</code></pre>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
