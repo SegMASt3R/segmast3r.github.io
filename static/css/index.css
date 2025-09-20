@@ -151,8 +151,7 @@ body {
   border-radius: 5px;
 }
 
-
-/* Enhanced styling for project page */
+/* ---------- Enhanced styling for project page (kept) ---------- */
 .hero {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
@@ -160,11 +159,11 @@ body {
 
 .hero .title {
   color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
 .hero .publication-authors {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255,255,255,0.9);
 }
 
 /* Architecture image styling */
@@ -173,7 +172,7 @@ body {
   max-width: 1000px;
   height: auto;
   border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
   transition: transform 0.3s ease;
 }
 
@@ -181,363 +180,245 @@ body {
   transform: scale(1.02);
 }
 
-/* Enhanced table styling */
-.results-table {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  margin: 2rem 0;
+/* Compact table class (less vertical padding) */
+.compact-table td,
+.compact-table th {
+  padding: 0.45rem 0.5rem !important;
+  font-size: 0.86rem;
 }
 
-.results-table .table {
-  margin-bottom: 0;
-}
+/* ---------------------------
+   Table sizing & scroll behavior
+   --------------------------- */
 
-.results-table tbody tr:hover {
-  background-color: #f8f9ff;
-}
-
-/* Best result highlighting */
-.best-result {
-  background: linear-gradient(135deg, #4CAF50, #45a049) !important;
-  color: white !important;
-  font-weight: bold;
-  border-radius: 6px;
-  padding: 0.25rem 0.5rem;
-}
-
-.second-best {
-  background: linear-gradient(135deg, #FF9800, #F57C00) !important;
-  color: white !important;
-  font-weight: bold;
-  border-radius: 6px;
-  padding: 0.25rem 0.5rem;
-}
-
-/* Metric badges */
-.metric-badge {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  border-radius: 25px;
-  font-weight: 600;
-  margin: 0.25rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.metric-badge.success {
-  background: linear-gradient(135deg, #4CAF50, #45a049);
-  color: white;
-}
-
-.metric-badge.info {
-  background: linear-gradient(135deg, #2196F3, #1976D2);
-  color: white;
-}
-
-.metric-badge.warning {
-  background: linear-gradient(135deg, #FF9800, #F57C00);
-  color: white;
-}
-
-/* Enhanced image styling */
-.result-image {
-  width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
-  margin-bottom: 1rem;
-}
-
-.result-image:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-}
-
-/* Section styling */
-.section {
-  padding: 4rem 1.5rem;
-}
-
-.section:nth-child(even) {
-  background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
-}
-
-/* Box styling for technical details */
-.tech-box {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
-  margin: 1rem 0;
-  border-left: 4px solid #667eea;
-}
-
-/* Notification styling */
-.notification {
-  border-radius: 12px;
-  border: none;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-}
-
-/* Video placeholder */
-.video-placeholder {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 12px;
-  padding: 3rem;
-  text-align: center;
-  color: white;
-  margin: 2rem 0;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-}
-
-.video-placeholder i {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  opacity: 0.8;
-}
-
-/* Responsive improvements */
-@media (max-width: 768px) {
-  .results-table {
-    font-size: 0.875rem;
-  }
-
-  .results-table th,
-  .results-table td {
-    padding: 0.5rem 0.25rem;
-  }
-
-  .architecture-image {
-    max-width: 100%;
-  }
-
-  .section {
-    padding: 2rem 1rem;
-  }
-}
-
-/* Animation for loading */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.fade-in-up {
-  animation: fadeInUp 0.6s ease-out;
-}
-
-/* Dataset comparison styling */
-.dataset-comparison {
-  background: white;
-  border-radius: 12px;
-  padding: 2rem;
-  margin: 2rem 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  border-top: 4px solid #667eea;
-}
-
-.dataset-title {
-  color: #667eea;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  font-size: 1.25rem;
-}
-
-
-
-/* Video styling */
-.video-container {
-  position: relative;
-  width: 100%;
-  margin-bottom: 2rem;
-}
-
-.video-player {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
-}
-
-.video-player:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-}
-
-/* Enhanced table subcolumn styling */
-.results-table th {
-  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
-  color: white;
-  font-weight: 600;
-  text-align: center;
-  padding: 0.75rem 0.5rem;
-  border: none;
-  font-size: 0.875rem;
-}
-
-.results-table td {
-  text-align: center;
-  padding: 0.75rem 0.5rem;
-  vertical-align: middle;
-  border-color: #f0f0f0;
-  font-size: 0.875rem;
-}
-
-/* Responsive table improvements */
-@media (max-width: 1024px) {
-  .results-table {
-    font-size: 0.75rem;
-  }
-
-  .results-table th,
-  .results-table td {
-    padding: 0.5rem 0.25rem;
-    font-size: 0.75rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .results-table {
-    font-size: 0.7rem;
-    overflow-x: auto;
-    display: block;
-    white-space: nowrap;
-  }
-
-  .results-table table {
-    min-width: 800px;
-  }
-
-  .results-table th,
-  .results-table td {
-    padding: 0.4rem 0.2rem;
-    font-size: 0.7rem;
-  }
-}
-
-
-/* Table scrolling container */
+/* Keep tables compact and let them size to their content.
+   Scroll only when the table is wider than the container. */
 .table-scroll-container {
   overflow-x: auto;
-  overflow-y: visible;
   -webkit-overflow-scrolling: touch;
   margin: 1rem 0;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
   background: white;
+  padding: 0.5rem;
 }
 
-.table-scroll-container::-webkit-scrollbar {
-  height: 8px;
+/* Make inner table size to content so it only scrolls when needed */
+.results-table table {
+  width: max-content;      /* content-width, so table won't inflate to full container */
+  min-width: 100%;         /* but at least fit the container */
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
-.table-scroll-container::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 4px;
+/* column separators: add vertical separators after each pose-bin group
+   Column indexes: 1(Method), 2-4(bin1), 5-7(bin2), 8-10(bin3), 11-13(bin4)
+   So we put a right border on columns 4, 7, 10 */
+.results-table th,
+.results-table td {
+  border-right: 1px solid transparent;
 }
 
-.table-scroll-container::-webkit-scrollbar-thumb {
-  background: #667eea;
-  border-radius: 4px;
+/* stronger separator after each pose-bin group */
+.results-table th:nth-child(4),
+.results-table td:nth-child(4),
+.results-table th:nth-child(7),
+.results-table td:nth-child(7),
+.results-table th:nth-child(10),
+.results-table td:nth-child(10) {
+  border-right: 2px solid #d9e8ff;
 }
 
-.table-scroll-container::-webkit-scrollbar-thumb:hover {
-  background: #5a6fd8;
+/* give first column (Method) a slight left padding and no right border so it reads well */
+.results-table td:first-child,
+.results-table th:first-child {
+  text-align: left;
+  padding-left: 1rem;
+  border-right: 1px solid #f0f4ff;
 }
 
-/* Enhanced table header styling with better contrast */
+/* header contrast & sticky header */
 .results-table thead th {
-  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-  color: white;
-  font-weight: 600;
-  text-align: center;
-  padding: 0.75rem 0.5rem;
-  border: none;
-  font-size: 0.875rem;
+  background: linear-gradient(135deg, #233044 0%, #2b4258 100%);
+  color: #fff;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 20;
+  padding: 0.6rem 0.6rem;
+  font-size: 0.88rem;
 }
 
-/* Better row highlighting with improved contrast */
+/* row styles */
 .results-table tbody tr:nth-child(even) {
-  background-color: #f8f9fa;
+  background: #fbfcfe;
 }
-
 .results-table tbody tr:nth-child(odd) {
-  background-color: white;
+  background: #ffffff;
 }
 
+/* hover */
 .results-table tbody tr:hover {
-  background-color: #e3f2fd !important;
-  transition: background-color 0.2s ease;
+  background-color: #e8f3ff !important;
+  transition: background 0.15s ease;
 }
 
-/* Method category headers with better contrast */
+/* best-row highlight (keeps table compact but visually obvious) */
+.results-table .best-row {
+  background: linear-gradient(135deg, #dff0e6 0%, #cfead6 100%) !important;
+  border-top: 2px solid #28a745;
+}
+.results-table .best-row td {
+  color: #165a2b;
+  font-weight: 700;
+}
+
+/* method category header style */
 .method-category-header {
   background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%) !important;
   color: white !important;
-  font-weight: bold;
+  font-weight: 700;
   text-align: center;
-  border-top: 2px solid #495057;
-  border-bottom: 1px solid #495057;
+  padding: 0.5rem;
 }
 
-/* Improved best result highlighting */
-.results-table tbody tr:last-child {
-  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%) !important;
-  border-top: 2px solid #28a745;
+/* reduce excessive padding for compactness */
+.results-table td {
+  padding: 0.5rem 0.6rem;
+  font-size: 0.86rem;
 }
 
-.results-table tbody tr:last-child td {
-  font-weight: 600;
-  color: #155724;
+/* ensure tables remain readable on mobile, with horizontal scroll when necessary */
+@media (max-width: 768px) {
+  .table-scroll-container {
+    padding: 0.35rem;
+  }
+  .results-table table {
+    min-width: 760px; /* allow horizontal scroll on small screens for wide tables */
+  }
+  .results-table th,
+  .results-table td {
+    padding: 0.35rem 0.4rem;
+    font-size: 0.75rem;
+  }
 }
 
-/* Video autoplay styling */
+/* ---------------------------
+   Video styling (autoplay-friendly)
+   --------------------------- */
 .video-player {
   width: 100%;
   height: auto;
   border-radius: 12px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.12);
 }
 
-.video-player:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+/* small visual hint that muted autoplay will happen */
+.video-container p.is-italic {
+  margin-top: 0.35rem;
+  font-size: 0.88rem;
 }
 
-/* Responsive table improvements */
-@media (max-width: 1024px) {
-  .table-scroll-container {
-    font-size: 0.8rem;
-  }
-
-  .results-table th,
-  .results-table td {
-    padding: 0.5rem 0.3rem;
-    font-size: 0.8rem;
-  }
+/* small responsive tweak for the architecture image (keeps it large on desktop, fine on mobile) */
+.architecture-image {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
 }
 
-@media (max-width: 768px) {
-  .table-scroll-container {
-    font-size: 0.75rem;
-  }
+/* subtle improvements to metric badges (kept) */
+.metric-badge {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  border-radius: 22px;
+  font-weight: 600;
+  margin: 0.2rem;
+}
 
-  .results-table th,
-  .results-table td {
-    padding: 0.4rem 0.2rem;
-    font-size: 0.75rem;
-  }
+/* keep the same theme for notification boxes, no changes required */
+.dataset-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: left;
+  margin: 1.2rem 0 0.6rem 0;
+  padding-left: 0.4rem;
+  border-left: 5px solid #4a6cf7;   /* vibrant left bar */
+  color: #2b3a55;                  /* dark heading */
+}
+
+/* ---------------------------
+   Dataset comparison wrapper
+   --------------------------- */
+.dataset-comparison {
+  margin: 2rem 0;
+}
+
+/* generic result images */
+.result-image {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  margin-bottom: 0.5rem;
+  transition: transform 0.25s ease;
+}
+.result-image:hover {
+  transform: scale(1.02);
+}
+
+/* tech-box containers */
+.tech-box {
+  background: #f9fafc;
+  border: 1px solid #e1e7f0;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  height: 100%;
+}
+
+/* video container (navigation videos) */
+.video-container {
+  margin-bottom: 1rem;
+}
+
+/* ---------------------------
+   Fix column borders for 2-subcolumn groups
+   --------------------------- */
+
+/* Instance Mapping: 1 method col + 8 groups (2 cols each) */
+#instance-mapping .results-table th,
+#instance-mapping .results-table td {
+  border-right: 1px solid transparent;
+}
+#instance-mapping .results-table th:nth-child(3),
+#instance-mapping .results-table td:nth-child(3),
+#instance-mapping .results-table th:nth-child(5),
+#instance-mapping .results-table td:nth-child(5),
+#instance-mapping .results-table th:nth-child(7),
+#instance-mapping .results-table td:nth-child(7),
+#instance-mapping .results-table th:nth-child(9),
+#instance-mapping .results-table td:nth-child(9),
+#instance-mapping .results-table th:nth-child(11),
+#instance-mapping .results-table td:nth-child(11),
+#instance-mapping .results-table th:nth-child(13),
+#instance-mapping .results-table td:nth-child(13),
+#instance-mapping .results-table th:nth-child(15),
+#instance-mapping .results-table td:nth-child(15),
+#instance-mapping .results-table th:nth-child(17),
+#instance-mapping .results-table td:nth-child(17) {
+  border-right: 2px solid #d9e8ff;
+}
+
+/* Navigation: 1 method col + 4 groups (2 cols each) */
+#navigation-results .results-table th,
+#navigation-results .results-table td {
+  border-right: 1px solid transparent;
+}
+#navigation-results .results-table th:nth-child(3),
+#navigation-results .results-table td:nth-child(3),
+#navigation-results .results-table th:nth-child(5),
+#navigation-results .results-table td:nth-child(5),
+#navigation-results .results-table th:nth-child(7),
+#navigation-results .results-table td:nth-child(7),
+#navigation-results .results-table th:nth-child(9),
+#navigation-results .results-table td:nth-child(9) {
+  border-right: 2px solid #d9e8ff;
 }
