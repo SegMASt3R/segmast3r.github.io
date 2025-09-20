@@ -217,7 +217,7 @@
 
             <!-- Replica Results -->
             <div class="dataset-comparison" id="replica-results">
-              <h3 class="dataset-title">Cross-Dataset Generalization — Replica</h3>
+              <h3 class="dataset-title">Cross-Dataset Generalization on Replica</h3>
               <div class="table-scroll-container">
                 <table class="table is-hoverable is-fullwidth results-table">
                   <thead>
@@ -279,10 +279,10 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td>SAM2 (Video Prop)</td><td>0.6389</td><td>0.7516</td><td>0.7681</td><td>0.5029</td><td>0.5884</td><td>0.615</td><td>0.3142</td><td>0.3823</td><td>0.4175</td><td>0.2019</td><td>0.2593</td><td>0.2875</td><td>0.4147</td><td>0.4956</td><td>0.5222</td></tr>
-                    <tr><td>MASt3R</td><td>0.3437</td><td>0.4014</td><td>0.5203</td><td>0.2862</td><td>0.3443</td><td>0.4575</td><td>0.2472</td><td>0.3067</td><td>0.4242</td><td>0.2370</td><td>0.2974</td><td>0.4220</td><td>0.2786</td><td>0.3375</td><td>0.4560</td></tr>
-                    <tr><td>DINOv2</td><td>0.3920</td><td>0.4563</td><td>0.6109</td><td>0.2596</td><td>0.3296</td><td>0.4883</td><td>0.1991</td><td>0.2701</td><td>0.4173</td><td>0.1737</td><td>0.2455</td><td>0.3784</td><td>0.2562</td><td>0.3254</td><td>0.4738</td></tr>
-                    <tr class="best-row"><td><strong>SegMASt3R (AMG / FastSAM)</strong></td><td>0.7089</td><td>0.7443</td><td>0.7694</td><td>0.6825</td><td>0.7205</td><td>0.7455</td><td>0.6444</td><td>0.6883</td><td>0.7178</td><td>0.6032</td><td>0.6548</td><td>0.6827</td><td>0.6598</td><td>0.7020</td><td>0.7289</td></tr>
+                    <tr><td>SAM2 (Video Prop)</td><td>63.89</td><td>75.16</td><td>76.81</td><td>50.29</td><td>58.84</td><td>61.5</td><td>31.42</td><td>38.23</td><td>41.75</td><td>20.19</td><td>25.93</td><td>28.75</td><td>41.47</td><td>49.56</td><td>52.22</td></tr>
+                    <tr><td>MASt3R</td><td>34.37</td><td>40.14</td><td>52.03</td><td>28.62</td><td>34.43</td><td>45.75</td><td>24.72</td><td>30.67</td><td>42.42</td><td>23.70</td><td>29.74</td><td>42.20</td><td>27.86</td><td>33.75</td><td>45.60</td></tr>
+                    <tr><td>DINOv2</td><td>39.20</td><td>45.63</td><td>61.09</td><td>25.96</td><td>32.96</td><td>48.83</td><td>19.91</td><td>27.01</td><td>41.73</td><td>17.37</td><td>24.55</td><td>37.84</td><td>25.62</td><td>32.54</td><td>47.38</td></tr>
+                    <tr class="best-row"><td><strong>SegMASt3R (AMG / FastSAM)</strong></td><td>70.89</td><td>74.43</td><td>76.94</td><td>68.25</td><td>72.05</td><td>74.55</td><td>64.44</td><td>68.83</td><td>71.78</td><td>60.32</td><td>65.48</td><td>68.27</td><td>65.98</td><td>70.20</td><td>72.89</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -292,7 +292,7 @@
             </div>
 
             <br>
-            
+
             <!-- MapFree outdoor (IoU / per-pose-bin from rebuttal) -->
             <div class="dataset-comparison" id="mapfree-results">
               <h3 class="dataset-title">Outdoor Generalization: MapFree (IoU across pose-bins)</h3>
@@ -315,35 +315,35 @@
                       <td>DINOv2 (off-the-shelf)</td>
                       <td>Multiple</td>
                       <td>MapFree</td>
-                      <td>84.4</td><td>91.2</td><td>86.5</td><td>79.1</td><td>72.3</td>
+                      <td>84.4</td><td>85.4</td><td>85.2</td><td>83.5</td><td>83.8</td>
                     </tr>
                     <tr>
                       <td>MASt3R (Vanilla)</td>
                       <td>Multiple</td>
                       <td>MapFree</td>
-                      <td>69.2</td><td>77.4</td><td>70.1</td><td>63.5</td><td>59.3</td>
+                      <td>69.2</td><td>73.4</td><td>69.8</td><td>70.0</td><td>66.1</td>
                     </tr>
                     <tr>
                       <td>SegMASt3R (SPP)</td>
                       <td>ScanNet++</td>
                       <td>MapFree</td>
-                      <td>75.2</td><td>83.5</td><td>76.3</td><td>70.2</td><td>65.6</td>
+                      <td>75.2</td><td>75.2</td><td>74.6</td><td>76.5</td><td>74.5</td>
                     </tr>
                     <tr>
                       <td>SegMASt3R (SPP + Dustbin MF)</td>
                       <td>ScanNet++</td>
                       <td>MapFree</td>
-                      <td>88.7</td><td>93.2</td><td>89.5</td><td>85.0</td><td>80.2</td>
+                      <td>88.7</td><td>88.6</td><td>88.6</td><td>88.5</td><td>93.9</td>
                     </tr>
                     <tr class="best-row">
                       <td><strong>SegMASt3R (MF)</strong></td>
                       <td>MapFree</td>
                       <td>MapFree</td>
                       <td><strong>93.7</strong></td>
-                      <td><strong>96.0</strong></td>
-                      <td><strong>94.1</strong></td>
-                      <td><strong>91.8</strong></td>
-                      <td><strong>89.5</strong></td>
+                      <td><strong>93.3</strong></td>
+                      <td><strong>93.7</strong></td>
+                      <td><strong>93.9</strong></td>
+                      <td><strong>93.9</strong></td>
                     </tr>
                   </tbody>
                 </table>
