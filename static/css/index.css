@@ -422,3 +422,18 @@ body {
 #navigation-results .results-table td:nth-child(9) {
   border-right: 2px solid #d9e8ff;
 }
+
+#mapfree-results .results-table th,
+#mapfree-results .results-table td {
+  border-right: 1px solid transparent;
+}
+#mapfree-results .results-table th:nth-child(4),
+#mapfree-results .results-table td:nth-child(4),
+#mapfree-results .results-table th:nth-child(5),
+#mapfree-results .results-table td:nth-child(5),
+#mapfree-results .results-table th:nth-child(6),
+#mapfree-results .results-table td:nth-child(6),
+#mapfree-results .results-table th:nth-child(7),
+#mapfree-results .results-table td:nth-child(7) {
+  border-right: 2px solid #d9e8ff;
+}

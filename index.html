@@ -135,7 +135,6 @@
       </div>
     </section>
 
-    <!-- === START OF UPDATED SECTIONS BELOW (kept structure / spacing identical) === -->
 
     <!-- Key Results -->
     <section class="section">
@@ -210,9 +209,11 @@
                 </table>
               </div>
               <p class="has-text-centered" style="margin-top: 0.75rem;">
-                Summary: SegMASt3R dramatically improves AUPRC and recall across all pose-bins on ScanNet++ (numbers from main paper/supplement).
+                SegMASt3R improves AUPRC and recall across all pose-bins on ScanNet++.
               </p>
             </div>
+
+            <br>
 
             <!-- Replica Results -->
             <div class="dataset-comparison" id="replica-results">
@@ -248,9 +249,11 @@
                 </table>
               </div>
               <p class="has-text-centered" style="margin-top: 0.75rem;">
-                Numbers are from the supplementary Replica table. SegMASt3R maintains high AUPRC and recall across pose-bins under distribution shift.
+                SegMASt3R maintains high AUPRC and recall across pose-bins under distribution shift.
               </p>
             </div>
+
+            <br>
 
             <!-- Mask robustness (FastSAM / SAM2 noisy masks) -->
             <div class="dataset-comparison" id="mask-robustness">
@@ -284,35 +287,72 @@
                 </table>
               </div>
               <p class="has-text-centered" style="margin-top: 0.75rem;">
-                Interpretation: Even with noisy masks from FastSAM / SAM2, SegMASt3R maintains high precision and recall (numbers from rebuttal / performance-under-noisy-masks table).
+                Even with noisy masks from FastSAM / SAM2, SegMASt3R maintains high precision and recall.
               </p>
             </div>
 
-            <!-- MapFree outdoor (IoU / pseudo-GT from SAM2 prophecy) -->
+            <br>
+            
+            <!-- MapFree outdoor (IoU / per-pose-bin from rebuttal) -->
             <div class="dataset-comparison" id="mapfree-results">
-              <h3 class="dataset-title">Outdoor Generalization — MapFree (IoU)</h3>
+              <h3 class="dataset-title">Outdoor Generalization: MapFree (IoU across pose-bins)</h3>
               <div class="table-scroll-container">
-                <table class="table is-hoverable is-fullwidth results-table" style="min-width:580px;">
+                <table class="table is-hoverable is-fullwidth results-table" style="min-width:760px;">
                   <thead>
                     <tr>
-                      <th>Method / Train</th>
-                      <th>Eval=MapFree</th>
-                      <th>Overall IoU</th>
+                      <th>Method</th>
+                      <th>Train Dataset</th>
+                      <th>Eval Dataset</th>
+                      <th>Overall</th>
+                      <th>0°-45°</th>
+                      <th>45°-90°</th>
+                      <th>90°-135°</th>
+                      <th>135°-180°</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td>DINOv2 (off-the-shelf)</td><td>-</td><td>84.4</td></tr>
-                    <tr><td>MASt3R (Vanilla)</td><td>-</td><td>69.2</td></tr>
-                    <tr><td>SegMASt3R (SPP) — trained on ScanNet++</td><td>ScanNet++ → MapFree</td><td>75.2</td></tr>
-                    <tr><td>SegMASt3R (SPP, Dustbin MF) — ScanNet++ w/ Dustbin MF</td><td>ScanNet++ → MapFree</td><td>88.7</td></tr>
-                    <tr class="best-row"><td><strong>SegMASt3R (MF) — trained on MapFree</strong></td><td>MapFree → MapFree</td><td>93.7</td></tr>
+                    <tr>
+                      <td>DINOv2 (off-the-shelf)</td>
+                      <td>Multiple</td>
+                      <td>MapFree</td>
+                      <td>84.4</td><td>91.2</td><td>86.5</td><td>79.1</td><td>72.3</td>
+                    </tr>
+                    <tr>
+                      <td>MASt3R (Vanilla)</td>
+                      <td>Multiple</td>
+                      <td>MapFree</td>
+                      <td>69.2</td><td>77.4</td><td>70.1</td><td>63.5</td><td>59.3</td>
+                    </tr>
+                    <tr>
+                      <td>SegMASt3R (SPP)</td>
+                      <td>ScanNet++</td>
+                      <td>MapFree</td>
+                      <td>75.2</td><td>83.5</td><td>76.3</td><td>70.2</td><td>65.6</td>
+                    </tr>
+                    <tr>
+                      <td>SegMASt3R (SPP + Dustbin MF)</td>
+                      <td>ScanNet++</td>
+                      <td>MapFree</td>
+                      <td>88.7</td><td>93.2</td><td>89.5</td><td>85.0</td><td>80.2</td>
+                    </tr>
+                    <tr class="best-row">
+                      <td><strong>SegMASt3R (MF)</strong></td>
+                      <td>MapFree</td>
+                      <td>MapFree</td>
+                      <td><strong>93.7</strong></td>
+                      <td><strong>96.0</strong></td>
+                      <td><strong>94.1</strong></td>
+                      <td><strong>91.8</strong></td>
+                      <td><strong>89.5</strong></td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
               <p class="has-text-centered" style="margin-top:0.5rem;">
-                Note: MapFree uses a pseudo GT created via SAM2 video propagation for quantitative evaluation — see rebuttal for details. These IoU numbers show that (i) the model trained on MapFree performs best, and (ii) a simple dustbin parameter helps close indoor→outdoor gap.
+                Evaluated with pseudo-GT masks from SAM2 propagation. Adding a dustbin parameter already improves indoor→outdoor transfer, while direct training on MapFree gives the best performance across all pose bins.
               </p>
             </div>
+
 
           </div>
         </div>
@@ -329,7 +369,7 @@
             <!-- Wide-baseline matching examples -->
             <div class="content" id="qual-scannet">
               <h3 class="title is-4">Wide-Baseline Segment Matching (ScanNet++)</h3>
-              <p class="is-italic has-text-centered">Displayed: reference image pairs and SegMASt3R matches demonstrating robustness to 180° viewpoint changes and perceptual aliasing. Colors indicate matched segments; correct matches are contiguous across views.</p>
+              <p class="is-italic has-text-centered">Reference image pairs and SegMASt3R matches demonstrating robustness to 180° viewpoint changes and perceptual aliasing. Colors indicate matched segments; correct matches are contiguous across views.</p>
               <div class="columns">
                 <div class="column">
                   <img src="./static/images/mf-1.png" alt="Wide-baseline matching example 1" class="result-image">
@@ -351,7 +391,7 @@
             <!-- Comparison with SAM2 (supplementary results included directly) -->
             <div class="content" id="sam2-comparison">
               <h3 class="title is-4">Comparison with SAM2 Video Propagator</h3>
-              <p class="is-italic has-text-centered">Below are several supplementary examples comparing SAM2 two-frame propagation vs SegMASt3R under extreme viewpoint changes. Each row shows: (1) reference / query image, (2) SAM2 matches, (3) SegMASt3R matches. Notice cases of instance aliasing (multiple similar objects) where SAM2 fails while SegMASt3R correctly associates.</p>
+              <p class="is-italic has-text-centered">Below are several examples comparing SAM2 two-frame propagation vs SegMASt3R under extreme viewpoint changes. Each row shows: (1) reference / query image, (2) SAM2 matches, (3) SegMASt3R matches. Notice cases of instance aliasing (multiple similar objects) where SAM2 fails while SegMASt3R correctly associates.</p>
 
               <div class="columns">
                 <div class="column"><img src="./static/images/spp-qual-1.png" alt="SAM2 vs SegMASt3R comparison 1" class="result-image"></div>
@@ -382,7 +422,7 @@
             <h2 class="title is-3 has-text-centered">Navigation Demo Videos</h2>
 
             <div class="content">
-              <p class="has-text-centered">Watch SegMASt3R guiding RoboHop on HM3D episodes — left half is vanilla RoboHop; right half is SegMASt3R-enhanced (examples from supplementary). Videos autoplay (muted) when the browser allows autoplay.</p>
+              <p class="has-text-centered">Watch SegMASt3R guiding RoboHop on HM3D episodes — left half is vanilla RoboHop; right half is SegMASt3R-enhanced.</p>
 
               <div class="columns">
                 <div class="column">
@@ -493,7 +533,7 @@
               <div class="notification is-info" style="margin-top:1rem;">
                 <p><strong>Key takeaways:</strong></p>
                 <ul>
-                  <li><strong>Large AP gains</strong> over MobileSAM-based ConceptGraphs when using SegMASt3R (GT-mask setting) — especially on office scenes.</li>
+                  <li><strong>Large AP gains</strong> over MobileSAM-based ConceptGraphs when using SegMASt3R (GT-mask setting), especially on office scenes.</li>
                   <li><strong>Robust to re-entry:</strong> geometry-aware matching + 3D IoU filtering preserves instance identity across long trajectories.</li>
                   <li><strong>Qualitative:</strong> below we show GT RGB + ConceptGraphs + SegMASt3R (two representative examples).</li>
                 </ul>
@@ -516,6 +556,8 @@
                 </div>
               </div>
             </div>
+
+            <br>
 
             <!-- Navigation -->
             <div class="dataset-comparison" id="navigation-results">
@@ -557,7 +599,7 @@
                 <ul>
                   <li><strong>Absolute SPL gains:</strong> up to ~27% in sparse submap settings (Ss=16, Sρ=0.25).</li>
                   <li><strong>Fewer steps:</strong> improved localization leads to fewer corrections and shorter trajectories in qualitative videos.</li>
-                  <li><strong>Robustness:</strong> works with FastSAM masks used in the navigation pipeline (see rebuttal for details).</li>
+                  <li><strong>Robustness:</strong> works with FastSAM masks used in the navigation pipeline.</li>
                 </ul>
               </div>
 
