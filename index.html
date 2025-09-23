@@ -8,7 +8,7 @@
     />
     <meta
       name="keywords"
-      content="SegMASt3R, Segment Matching, 3D Foundation Models, MASt3R, Image-Goal Navigation, Instance Mapping, Computer Vision"
+      content="SegMASt3R, Segment Matching, 3D Foundation Models, MASt3R, Object-Relative Navigation, Instance Mapping, Computer Vision"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SegMASt3R: Geometry Grounded Segment Matching</title>
@@ -107,7 +107,7 @@
                 180° rotation. Extensive experiments show that our approach outperforms state-of-the-art methods,
                 including the SAM2 video propagator and local feature matching methods, by up to 30% on the
                 AUPRC metric, on ScanNet++ and Replica datasets. We further demonstrate benefits of the proposed model
-                on relevant downstream tasks, including 3D instance segmentation and image-goal navigation.
+                on relevant downstream tasks, including 3D instance segmentation and object-relative navigation.
               </p>
             </div>
           </div>
@@ -422,7 +422,7 @@
             <h2 class="title is-3 has-text-centered">Navigation Demo Videos</h2>
 
             <div class="content">
-              <p class="has-text-centered">Watch SegMASt3R guiding RoboHop on HM3D episodes — left half is vanilla RoboHop; right half is SegMASt3R-enhanced.</p>
+              <p class="has-text-centered">Watch SegMASt3R guiding RoboHop on HM3D episodes — left half is vanilla RoboHop which is using SuperPoint + LightGlue matcher; right half is with SegMASt3R as the matcher.</p>
 
               <div class="columns">
                 <div class="column">
@@ -561,7 +561,7 @@
 
             <!-- Navigation -->
             <div class="dataset-comparison" id="navigation-results">
-              <h3 class="dataset-title">Image-Goal Navigation (RoboHop + SegMASt3R)</h3>
+              <h3 class="dataset-title">Object-Relative Navigation (RoboHop + SegMASt3R)</h3>
               <div class="table-scroll-container">
                 <table class="table is-hoverable is-fullwidth results-table" style="min-width:760px;">
                   <thead>
@@ -578,7 +578,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td>RoboHop (vanilla)</td>
+                      <td>RoboHop (SuperPoint + LightGlue matcher)</td>
                       <td>36.34</td><td>54.25</td><td>54.51</td><td>69.98</td><td>60.57</td><td>68.29</td><td>57.52</td><td>68.47</td>
                     </tr>
                     <tr class="best-row">
