@@ -152,7 +152,7 @@ body {
 }
 
 /* ---------- Enhanced styling for project page (kept) ---------- */
-.hero {
+/* .hero {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
 }
@@ -164,7 +164,7 @@ body {
 
 .hero .publication-authors {
   color: rgba(255,255,255,0.9);
-}
+} */
 
 /* Architecture image styling */
 .architecture-image {
